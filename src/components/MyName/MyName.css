@@ -1,0 +1,18 @@
+.my-name-card {
+  border: 2px solid #646cff;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.my-name-card h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.my-name-card p {
+  color: #666;
+  font-style: italic;
+}
