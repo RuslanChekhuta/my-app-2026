@@ -1,16 +1,206 @@
-# React + Vite
+### РОЛЬ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Привет! Я твой ментор по React. Мы продолжаем работу над проектом **my-app-2026**.
 
-Currently, two official plugins are available:
+### КОНТЕКСТ
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+На данный момент у нас чистый проект. `App.jsx` пуст. Мы переходим к **Уроку 1.4: Файловая структура проекта. Стилизация (CSS, модули)**.
 
-## React Compiler
+Наша цель сегодня — превратить «свалку файлов» в профессиональную архитектуру, которую легко поддерживать и масштабировать.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+### ТЕОРИЯ: Организация — залог успеха
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+В React нет жестких требований к структуре, но есть общепринятые практики, которые делают код чистым.
+
+**1. Основные папки проекта:**
+
+- **`node_modules`**: Здесь лежат зависимости (библиотеки), установленные через npm. Мы эту папку **не трогаем**.
+- **`public`**: Для статических файлов, которые не обрабатываются сборщиком (например, иконка сайта favicon или картинки, которые нужны «как есть»).
+- **`src` (Source)**: Здесь живет весь наш исходный код. Это наша главная рабочая зона.
+
+**2. Разделение ответственности внутри `src`:**
+Внутри `src` мы не сваливаем всё в одну кучу. Мы делим код по смыслу:
+
+- **`components`**: Здесь лежат переиспользуемые «кирпичики» интерфейса (кнопки, хедеры, футеры). Если элемент используется в нескольких местах или логически обособлен — ему место здесь.
+- **`pages`**: Здесь лежат компоненты-страницы (например, `Main`, `About`). Страница — это компонент, который собирает внутри себя другие компоненты (хедер, контент, футер) и управляет общей логикой.
+- **`utils`** (опционально): Вспомогательные функции (валидаторы, форматирование дат).
+
+**3. Правило «Папка на компонент»:**
+Лучшая практика — создавать для каждого компонента отдельную папку.
+
+- _Плохо:_ `Header.jsx`, `Header.css` просто лежат в куче.
+- _Хорошо:_ Папка `src/components/Header`, а внутри неё `Header.jsx` и `Header.css`.
+  Это позволяет хранить рядом с компонентом его стили, тесты и иконки.
+
+**4. Именование:**
+Названия компонентов и их папок пишем в **PascalCase** (с Большой Буквы). Например: `Button`, `UserProfile`. Это дает четкую логику коду. Если изменишь регистр букв в названии файла, Git может это не заметить, поэтому будь внимателен с именованием сразу.
+
+---
+
+### ПРАКТИЧЕСКИЕ ЗАДАЧИ
+
+Мы создадим структуру для главной страницы, используя правильную вложенность папок.
+
+#### Задача 1: Подготовка фундамента
+
+Создай правильную структуру папок внутри `src`.
+
+1.  Удали всё лишнее из `src`, если там есть файлы вроде `assets` (если они не нужны), но пока можешь оставить как есть.
+2.  Создай папку `src/components`.
+3.  Создай папку `src/pages`.
+
+> _Это подготовительный этап, в браузере ничего не изменится._
+
+---
+
+#### Задача 2: Создаем компонент Header
+
+Мы сделаем «шапку» сайта. Используем подход «папка для компонента».
+
+1.  Создай папку `src/components/Header`.
+2.  Внутри создай два файла: `Header.jsx` и `Header.css`.
+
+**Файл: `src/components/Header/Header.css` (Вставь этот код полностью):**
+
+```css
+.header {
+  background-color: #282c34;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  border-bottom: 3px solid #61dafb;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+```
+
+**Файл: `src/components/Header/Header.jsx` (Допиши код):**
+
+```jsx
+// 1. Импортируй CSS файл из текущей папки
+import "./Header.css";
+
+// 2. Создай функциональный компонент Header
+// Используй семантический тег <header> с классом "header"
+// Внутри добавь <h1> с классом "title" и текстом "React 2026 App"
+
+// function ... {
+//   return (
+//      ...
+//   );
+// }
+
+// 3. Экспортируй компонент по умолчанию (export default)
+```
+
+---
+
+#### Задача 3: Создаем компонент Footer
+
+Подвал сайта. Тренируем структуру еще раз.
+
+1.  Создай папку `src/components/Footer`.
+2.  Создай файлы: `Footer.jsx` и `Footer.css`.
+
+**Файл: `src/components/Footer/Footer.css`:**
+
+```css
+.footer {
+  background-color: #20232a;
+  color: #999;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.8rem;
+}
+```
+
+**Файл: `src/components/Footer/Footer.jsx`:**
+
+```jsx
+// Импорт стилей...
+
+// Объяви компонент Footer
+// Верни <footer> с классом "footer"
+// Текст внутри: "© 2026 My React Project. Все права защищены."
+
+// Экспорт...
+```
+
+---
+
+#### Задача 4: Собираем Главную Страницу (Layout)
+
+Теперь создадим страницу, которая объединит эти компоненты. Согласно источнику, компоненты страниц управляют размещением других компонентов.
+
+1.  Создай папку `src/pages/Home`.
+2.  Внутри создай файл `Home.jsx` (стили пока не нужны).
+
+**Файл: `src/pages/Home/Home.jsx`:**
+
+```jsx
+// 1. Импортируй Header из '../../components/Header/Header'
+// 2. Импортируй Footer из '../../components/Footer/Footer'
+
+const Home = () => {
+  return (
+    <>
+      {/* Вставь компонент <Header /> */}
+
+      <main style={{ padding: "20px", textAlign: "center" }}>
+        <h2>Добро пожаловать на курс!</h2>
+        <p>Мы изучаем файловую структуру React.</p>
+      </main>
+
+      {/* Вставь компонент <Footer /> */}
+    </>
+  );
+};
+
+export default Home;
+```
+
+---
+
+#### Задача 5: Точка входа
+
+Теперь подключим нашу страницу в главный файл приложения. `Main.jsx` (или `index.js`) — это точка входа, но `App.jsx` часто выступает корневым компонентом.
+
+**Файл: `src/App.jsx`:**
+
+```jsx
+// Импортируй компонент Home из папки pages
+// import Home from ...
+
+function App() {
+  return (
+    // Просто верни компонент Home
+    // <Home />
+    null // <-- Замени null на компонент
+  );
+}
+
+export default App;
+```
+
+---
+
+### ПРОВЕРКА
+
+1.  Запусти проект (`npm run dev`).
+2.  **Ожидаемый результат в браузере:**
+    - Сверху: Темная полоса (Header) с текстом "REACT 2026 APP".
+    - По центру: Текст приветствия.
+    - Снизу: Фиксированная темная полоса (Footer) с копирайтом.
+
+Если всё отобразилось корректно — поздравляю! Ты только что реализовал **модульную файловую структуру**. Жду выполнения!

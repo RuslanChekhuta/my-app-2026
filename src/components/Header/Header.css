@@ -1,0 +1,15 @@
+.header {
+  background-color: #282c34;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  border-bottom: 3px solid #61dafb;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
