@@ -1,16 +1,213 @@
-# React + Vite
+Я изучил предоставленные материалы: программу курса, системный промпт ментора и транскрипцию урока из YouTube.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ниже представлен план урока и практические задания, составленные строго в соответствии с твоей ролью ментора и текущим контентом видео, с учетом ограничений программы обучения.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Тема урока: 1.6. Структура проекта, Импорты/Экспорты и Работа с изображениями
 
-## React Compiler
+**Цель:** Организовать структуру папок, разобрать разницу между `default` и `named` экспортами, научиться подключать стили и работать с картинками (из `assets` и `public`).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+> **Примечание ментора:** В видео упоминался компонент `UserList` с хуками `useState` и `useEffect`. Поскольку по программе курса это темы будущих уроков (1.10 и 2.1), в текущем задании мы это **пропускаем**, чтобы не нарушать правила обучения. Мы фокусируемся на верстке, структуре и типах компонентов (UI и Pages).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ТЕОРИЯ
+
+**1. Структура проекта и Типы компонентов**
+В видео мы выделили несколько типов компонентов:
+
+- **UI Components (Presentational):** Просто отображают данные (например, `Header`, `Footer`).
+- **Pages:** Компоненты-страницы, собирающие в себе другие блоки (например, `HomePage`).
+
+Для порядка мы создадим папки `src/components` (для UI) и `src/pages` (для страниц).
+
+**2. Импорт и Экспорт (Module System)**
+React использует модульную систему ES6.
+
+- **Default Export (`export default`):** Используется, когда модуль возвращает одну главную сущность. Импортировать можно под любым именем без фигурных скобок.
+- **Named Export (`export function ...`):** Используется, когда нужно экспортировать несколько сущностей или строго зафиксировать имя. Импортируется в фигурных скобках `{ Name }`.
+
+**3. Изображения в React**
+Существует два способа работы с картинками:
+
+- **Папка `src/assets`:** Файлы импортируются как модули (`import img from './...'`). Сборщик (Vite) обрабатывает их и оптимизирует. Используем внутри src.
+- **Папка `public`:** Файлы доступны по прямому URL (например, `/image.jpg`). React не обрабатывает их, они просто лежат на сервере.
+
+---
+
+### ПРАКТИКА
+
+**Подготовка:**
+Убедись, что твой проект `my-app-2026` запущен и чист.
+Скачай любые две картинки:
+
+1.  Назови `programmer.jpg` и положи в `src/assets/`.
+2.  Назови `laptop.jpg` и положи в папку `public/`.
+
+#### Задача 1: Создание UI компонента Header (Default Export)
+
+Мы создадим шапку сайта, используя экспорт по умолчанию.
+
+1.  Создай папку `src/components`.
+2.  В ней создай файл `Header.jsx`.
+3.  В ней создай файл `Header.css`.
+
+**CSS (`src/components/Header.css`):**
+
+```css
+.header {
+  background-color: #282c34;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+```
+
+**JSX (`src/components/Header.jsx`):**
+
+```javascript
+// 1. Импортируй CSS файл (./Header.css)
+
+// 2. Напиши функциональный компонент Header, который возвращает:
+//    - тег <header> с классом "header"
+//    - внутри заголовок <h1> с текстом "My React App 2026"
+
+// 3. Сделай export default этого компонента
+```
+
+#### Задача 2: Создание UI компонента Footer (Named Export)
+
+Теперь создадим подвал, но используем именованный экспорт, чтобы почувствовать разницу.
+
+1.  В папке `src/components` создай файл `Footer.jsx`.
+2.  В ней создай файл `Footer.css`.
+
+**CSS (`src/components/Footer.css`):**
+
+```css
+.footer {
+  background-color: #20232a;
+  color: #61dafb;
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+```
+
+**JSX (`src/components/Footer.jsx`):**
+
+```javascript
+// 1. Импортируй стили
+
+// 2. Напиши функцию Footer.
+//    - Возвращает <footer> с классом "footer"
+//    - Внутри текст: "© 2026 Все права защищены"
+
+// 3. Используй именованный экспорт (export function Footer...)
+//    или напиши export перед объявлением функции.
+```
+
+#### Задача 3: Страница HomePage и работа с картинками
+
+Создадим компонент-страницу, куда выведем изображения двумя способами.
+
+1.  Создай папку `src/pages`.
+2.  В ней создай файл `HomePage.jsx` и `HomePage.css`.
+
+**CSS (`src/pages/HomePage.css`):**
+
+```css
+.home-page {
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 80px; /* Отступ под футер */
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.home-img {
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+```
+
+**JSX (`src/pages/HomePage.jsx`):**
+
+```javascript
+// 1. Импортируй стили
+// 2. Импортируй картинку из assets (назови её programmerImg)
+//    import programmerImg from '../assets/programmer.jpg'
+
+const HomePage = () => {
+  return (
+    <div className="home-page">
+      <h2>Добро пожаловать на главную!</h2>
+
+      <div className="image-container">
+        {/* Способ 1: Импорт (из assets) */}
+        {/* Вставь img с src={programmerImg} и классом "home-img" */}
+
+        {/* Способ 2: Прямой путь (из public) */}
+        {/* Вставь img с src="/laptop.jpg" (без точек!) и классом "home-img" */}
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;
+```
+
+#### Задача 4: Сборка приложения в App.jsx
+
+Теперь соберем все компоненты вместе. Обрати внимание на разницу в импорте Footer и Header.
+
+**CSS (`src/App.css`):**
+_Оставь пустым или удали содержимое, если там что-то есть._
+
+**JSX (`src/App.jsx`):**
+
+```javascript
+// 1. Импортируй Header (default import)
+// 2. Импортируй Footer (named import - в фигурных скобках!)
+// 3. Импортируй HomePage
+
+function App() {
+  return (
+    <>
+      {/* Вставь компонент Header */}
+
+      <main>{/* Вставь компонент HomePage */}</main>
+
+      {/* Вставь компонент Footer */}
+    </>
+  );
+}
+
+export default App;
+```
+
+---
+
+### Результат
+
+В браузере ты должен увидеть:
+
+1.  Темную шапку с заголовком.
+2.  По центру страницы две картинки (одна загружена через import, вторая через public URL).
+3.  Темный подвал, прижатый к низу экрана.
+
+Выполняй задачи по порядку. Если возникнет ошибка с путями к картинкам или импортами — пиши, разберем!
