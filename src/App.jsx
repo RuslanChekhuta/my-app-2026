@@ -1,5 +1,11 @@
+import RegForm from "./components/RegForm/RegForm";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <RegForm />
+    </>
+  );
 }
 
 export default App;
