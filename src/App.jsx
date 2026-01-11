@@ -1,5 +1,13 @@
+import CryptoMarket from "./components/CryptoMarket";
+import TransactionHistory from "./components/TransactionHistory";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <TransactionHistory />
+      <CryptoMarket />
+    </>
+  );
 }
 
 export default App;

@@ -1,0 +1,43 @@
+.history-container {
+  max-width: 400px;
+  margin: 20px auto;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  background: white;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.history-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Динамические классы */
+.income {
+  border-left: 5px solid #2ecc71;
+}
+
+.expense {
+  border-left: 5px solid #e74c3c;
+}
+
+.amount {
+  font-weight: bold;
+}
